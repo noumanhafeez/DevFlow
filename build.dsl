@@ -36,8 +36,7 @@ pipeline {
 
     stage "Release" {
         steps {
-            deploy "sh push_to_registry.sh"
-            deploy "sh notify_teams.sh"
+            deploy "sh deploy_prod.sh"
         }
     }
 }
