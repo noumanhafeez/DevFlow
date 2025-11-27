@@ -1,15 +1,26 @@
 pipeline {
-    stage "Build" {
+    stage "Build Stage" {
+        env "API_KEY=123456"
+
+        job "compile" {
+            steps {
+                run "echo compiling..."
+                make "all"
+            }
+        }
+
         steps {
-            run "echo Building app"
-            make "all"
+            test "echo build tests OK"
+        }
+
+        on_fail {
+            run "echo build failed!"
         }
     }
 
-    stage "Test" {
+    stage "Deployment" {
         steps {
-            test "echo test OK"
-            test "exit 1"
+            deploy "sh deploy.sh"
         }
     }
 }

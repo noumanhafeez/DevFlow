@@ -45,10 +45,14 @@
      RUN = 261,
      MAKE = 262,
      TEST = 263,
-     STRING = 264,
-     IDENTIFIER = 265,
-     LBRACE = 266,
-     RBRACE = 267
+     JOB = 264,
+     DEPLOY = 265,
+     ENV = 266,
+     ONFAIL = 267,
+     STRING = 268,
+     IDENTIFIER = 269,
+     LBRACE = 270,
+     RBRACE = 271
    };
 #endif
 /* Tokens.  */
@@ -58,22 +62,26 @@
 #define RUN 261
 #define MAKE 262
 #define TEST 263
-#define STRING 264
-#define IDENTIFIER 265
-#define LBRACE 266
-#define RBRACE 267
+#define JOB 264
+#define DEPLOY 265
+#define ENV 266
+#define ONFAIL 267
+#define STRING 268
+#define IDENTIFIER 269
+#define LBRACE 270
+#define RBRACE 271
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 10 "parser.y"
+#line 13 "parser.y"
 {
     char* str;
 }
 /* Line 1529 of yacc.c.  */
-#line 77 "parser.tab.h"
+#line 85 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

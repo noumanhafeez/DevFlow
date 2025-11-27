@@ -11,6 +11,10 @@
 "run"           return RUN;
 "make"          return MAKE;
 "test"          return TEST;
+"job"           return JOB;
+"deploy"        return DEPLOY;
+"env"           return ENV;
+"on_fail"       return ONFAIL;
 
 \"[^\"]*\" {
     yylval.str = strdup(yytext + 1);
@@ -18,14 +22,12 @@
     return STRING;
 }
 
-[a-zA-Z_][a-zA-Z0-9_]*    return IDENTIFIER;
+[a-zA-Z_][a-zA-Z0-9_]*  return IDENTIFIER;
+"{"                     return LBRACE;
+"}"                     return RBRACE;
 
-"{"     return LBRACE;
-"}"     return RBRACE;
-
-[ \t\n]+   ;      /* skip whitespace */
-
-.           ;     /* ignore anything else */
+[ \t\n]+                ;   /* ignore whitespace */
+.                       ;   /* ignore unknown chars */
 
 %%
 
