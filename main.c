@@ -8,3 +8,7 @@ int main()
     yyparse();
     return 0;
 }
+
+// Commands of runnig the deployment DSL parser:
+// make
+// ./dsl_runner < build.dsl

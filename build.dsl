@@ -1,26 +1,43 @@
 pipeline {
-    stage "Build Stage" {
-        env "API_KEY=123456"
-
-        job "compile" {
-            steps {
-                run "echo compiling..."
-                make "all"
-            }
-        }
+    stage "Setup" {
+        env "REGION=us-east-1"
+        env "VERSION=1.4.2"
 
         steps {
-            test "echo build tests OK"
-        }
-
-        on_fail {
-            run "echo build failed!"
+            run "echo setting up environment vars..."
         }
     }
 
-    stage "Deployment" {
+    stage "Quality Checks" {
+        job "lint" {
+            steps {
+                run "echo running linter..."
+                run "eslint ."
+            }
+        }
+
+        job "security_scan" {
+            steps {
+                run "echo scanning for vulnerabilities..."
+                run "snyk test"
+            }
+        }
+
+        on_fail {
+            run "echo SECURITY OR LINT FAILED — stopping pipeline."
+        }
+    }
+
+    stage "Build" {
         steps {
-            deploy "sh deploy.sh"
+            make "build"
+        }
+    }
+
+    stage "Release" {
+        steps {
+            deploy "sh push_to_registry.sh"
+            deploy "sh notify_teams.sh"
         }
     }
 }

@@ -7,3 +7,6 @@ dsl_runner: lexer.l parser.y main.c
 
 clean:
 	rm -f dsl_runner lex.yy.c parser.tab.c parser.tab.h
+
+bundle:
+	echo "Bundling..."
